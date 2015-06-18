@@ -133,13 +133,35 @@ isMinimizing <- function(data, problem){
   }
 }
 
+### TIME UNITS ###
+
+# get abbreviation of a time unit
+getTimeUnitAbbreviation <- function(time.unit = c("milliseconds", "seconds", "minutes", "hours")){
+  abbr <- switch(match.arg(time.unit),
+                 "milliseconds" = "ms",
+                 "seconds" = "sec",
+                 "minutes" = "min",
+                 "hours" = "h")
+  return(abbr)
+}
+# get the number of milliseconds contained in a specific time unit
+getTimeUnitMillis <- function(time.unit = c("milliseconds", "seconds", "minutes", "hours")){
+  ms <- switch(match.arg(time.unit),
+                 "milliseconds" = 1,
+                 "seconds" = 1000,
+                 "minutes" = 60000,
+                 "hours" = 3600000)
+  return(ms)
+}
+
 ### RELEASE QUESTIONS ###
 
 release_questions <- function() {
   c(
-    "Has the release date been set? Check DESCRIPTION and package docs.",
     "Has the version number been updated? Check DESCRIPTION, package docs and NEWS.md.",
-    "Is NEWS.md up to date?",
+    "Has the release date been set? Check DESCRIPTION, package docs and NEWS.md",
+    "Do the package docs refer to the correct version(s) of the extensions module?",
+    "Are the changes listed in NEWS.md up to date?",
     "Pushed everything to GitHub?"
   )
 }
